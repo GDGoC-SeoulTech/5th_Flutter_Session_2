@@ -2,6 +2,12 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:pokemon/features/pokemon/model/pokemon_model.dart';
 
+/// pokemon_api.dart
+///
+/// PokemonApi
+///
+/// Pokemon API에서 포켓몬 리스트와 정보를 불러오는 메소드를 정의하는 부분입니다!
+/// 네트워킹은 다음 세션에서 알아봐요.
 class PokemonApi {
   static Future<List<Pokemon>> fetchPokemonList({int limit = 20}) async {
     final url = Uri.parse("https://pokeapi.co/api/v2/pokemon?limit=$limit");
@@ -24,7 +30,7 @@ class PokemonApi {
       final speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/${i + 1}";
       final speciesRes = await http.get(Uri.parse(speciesUrl));
 
-      String koName = enName; // fallback
+      String koName = enName;
       if (speciesRes.statusCode == 200) {
         final speciesData = json.decode(speciesRes.body);
         final names = speciesData['names'] as List;

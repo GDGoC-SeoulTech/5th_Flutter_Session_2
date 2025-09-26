@@ -22,7 +22,13 @@ class PokemonListItem extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(pokemon.nameKo, style: const TextStyle(fontSize: 18)),
+          Row(
+            spacing: 8,
+            children: [
+              Image.network(pokemon.imageUrl, height: 32),
+              Text(pokemon.nameKo, style: const TextStyle(fontSize: 18)),
+            ],
+          ),
           const Icon(CupertinoIcons.forward, size: 18),
         ],
       ),

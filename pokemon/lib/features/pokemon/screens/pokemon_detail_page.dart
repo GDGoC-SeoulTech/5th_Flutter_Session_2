@@ -17,8 +17,9 @@ class PokemonDetailPage extends StatelessWidget {
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
-            spacing: 16,
+            spacing: 8,
             children: [
+              Image.network(pokemon.imageUrl),
               Text(
                 pokemon.nameKo,
                 style: const TextStyle(
@@ -26,7 +27,6 @@ class PokemonDetailPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              Image.network(pokemon.imageUrl),
             ],
           ),
         ),

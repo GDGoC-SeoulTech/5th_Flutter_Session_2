@@ -6,6 +6,10 @@ class PokemonApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CupertinoApp(title: "Pokémon", home: PokemonListPage());
+    return CupertinoApp(
+      title: "Pokémon",
+      theme: CupertinoThemeData(primaryColor: Color(0xFF222222)),
+      home: PokemonListPage(),
+    );
   }
 }

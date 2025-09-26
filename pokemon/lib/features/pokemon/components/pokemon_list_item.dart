@@ -1,15 +1,11 @@
 import 'package:flutter/cupertino.dart';
+import 'package:pokemon/features/pokemon/model/pokemon_model.dart';
 import 'package:pokemon/features/pokemon/screens/pokemon_detail_page.dart';
 
 class PokemonListItem extends StatelessWidget {
-  final String nameEn;
-  final String nameKo;
+  final Pokemon pokemon;
 
-  const PokemonListItem({
-    super.key,
-    required this.nameEn,
-    required this.nameKo,
-  });
+  const PokemonListItem({super.key, required this.pokemon});
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +15,14 @@ class PokemonListItem extends StatelessWidget {
         Navigator.push(
           context,
           CupertinoPageRoute(
-            builder: (context) =>
-                PokemonDetailPage(nameEn: nameEn, nameKo: nameKo),
+            builder: (context) => PokemonDetailPage(pokemon: pokemon),
           ),
         );
       },
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(nameKo, style: const TextStyle(fontSize: 18)),
+          Text(pokemon.nameKo, style: const TextStyle(fontSize: 18)),
           const Icon(CupertinoIcons.forward, size: 18),
         ],
       ),

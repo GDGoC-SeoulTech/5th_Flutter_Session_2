@@ -1,10 +1,9 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:pokemon/features/pokemon/model/pokemon_model.dart';
 
 class PokemonApi {
-  static Future<List<Map<String, String>>> fetchPokemonList({
-    int limit = 20,
-  }) async {
+  static Future<List<Pokemon>> fetchPokemonList({int limit = 20}) async {
     final url = Uri.parse("https://pokeapi.co/api/v2/pokemon?limit=$limit");
     final response = await http.get(url);
 
@@ -15,10 +14,13 @@ class PokemonApi {
     final data = json.decode(response.body);
     final results = data['results'] as List;
 
-    List<Map<String, String>> pokemons = [];
+    List<Pokemon> pokemons = [];
 
     for (var i = 0; i < results.length; i++) {
       final enName = results[i]['name'];
+      final id = i + 1;
+      final imageUrl =
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$id.png";
       final speciesUrl = "https://pokeapi.co/api/v2/pokemon-species/${i + 1}";
       final speciesRes = await http.get(Uri.parse(speciesUrl));
 
@@ -33,20 +35,11 @@ class PokemonApi {
         koName = koEntry['name'];
       }
 
-      pokemons.add({"en": enName, "ko": koName});
+      pokemons.add(
+        Pokemon(id: id, nameEn: enName, nameKo: koName, imageUrl: imageUrl),
+      );
     }
 
     return pokemons;
-  }
-
-  static Future<String?> fetchImage(String name) async {
-    final url = Uri.parse("https://pokeapi.co/api/v2/pokemon/$name");
-    final response = await http.get(url);
-
-    if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      return data['sprites']['front_default'];
-    }
-    throw Exception("Failed to fetchImage");
   }
 }

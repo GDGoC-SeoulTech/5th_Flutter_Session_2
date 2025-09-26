@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pokemon/features/pokemon/api/pokemon_api.dart';
 import 'package:pokemon/features/pokemon/components/pokemon_list_item.dart';
+import 'package:pokemon/features/pokemon/model/pokemon_model.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({super.key});
@@ -12,7 +13,7 @@ class PokemonListPage extends StatefulWidget {
 class _PokemonListPageState extends State<PokemonListPage> {
   bool isLoading = true;
   String? errorMessage;
-  List<Map<String, String>> pokemons = [];
+  List<Pokemon> pokemons = [];
 
   @override
   void initState() {
@@ -48,7 +49,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
                 itemCount: pokemons.length,
                 itemBuilder: (context, index) {
                   final p = pokemons[index];
-                  return PokemonListItem(nameEn: p["en"]!, nameKo: p["ko"]!);
+                  return PokemonListItem(pokemon: p);
                 },
               ),
       ),

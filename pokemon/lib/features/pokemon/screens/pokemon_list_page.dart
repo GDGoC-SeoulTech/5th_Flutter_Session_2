@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:pokemon/features/pokemon/api/pokemon_api.dart';
-import 'pokemon_detail_page.dart';
+import 'package:pokemon/features/pokemon/components/pokemon_list_item.dart';
 
 class PokemonListPage extends StatefulWidget {
   const PokemonListPage({super.key});
@@ -48,33 +48,7 @@ class _PokemonListPageState extends State<PokemonListPage> {
                 itemCount: pokemons.length,
                 itemBuilder: (context, index) {
                   final p = pokemons[index];
-                  return CupertinoButton(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 12,
-                    ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        CupertinoPageRoute(
-                          builder: (context) => PokemonDetailPage(
-                            nameEn: p["en"]!,
-                            nameKo: p["ko"]!,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          p["ko"] ?? p["en"]!,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const Icon(CupertinoIcons.forward, size: 18),
-                      ],
-                    ),
-                  );
+                  return PokemonListItem(nameEn: p["en"]!, nameKo: p["ko"]!);
                 },
               ),
       ),
